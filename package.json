@@ -1,0 +1,38 @@
+{
+  "name": "react-windy",
+  "version": "1.0.0",
+  "description": "Simple app show weather",
+  "repository": "https://github.com/harunalrashyid/react-windy.git",
+  "author": "Harun <harunalrashyid@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.12.0",
+    "gatsby": "^3.0.1",
+    "gatsby-plugin-image": "^1.1.1",
+    "gatsby-plugin-manifest": "^3.1.0",
+    "gatsby-plugin-react-helmet": "^4.1.0",
+    "gatsby-plugin-sharp": "^3.1.1",
+    "gatsby-plugin-sitemap": "^3.1.0",
+    "gatsby-plugin-styled-components": "^4.1.0",
+    "gatsby-source-filesystem": "^3.1.0",
+    "gatsby-transformer-sharp": "^3.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "gatsby-plugin-postcss": "^4.1.0",
+    "postcss": "^8.2.8",
+    "tailwindcss": "^2.0.4"
+  }
+}
