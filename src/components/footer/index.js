@@ -4,7 +4,9 @@ import { Container } from "../../styles/common";
 
 const Footer = () => (
   <FooterSection>
-    <FooterContainer>&copy; 2021 Windy</FooterContainer>
+    <FooterContainer>
+      <FooterCopyright>© { new Date().getFullYear() } Windy. API by OpenWeather</FooterCopyright>
+    </FooterContainer>
   </FooterSection>
 )
 
@@ -17,3 +19,10 @@ const FooterSection = styled.footer`
   bottom: 0;
 `
 const FooterContainer = styled(Container)``
+
+const FooterCopyright = styled.p`
+  color: #ffffff;
+  font-size: 0.75rem;
+  padding: 1.25rem 0;
+  margin: 0;
+`

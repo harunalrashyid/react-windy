@@ -57,7 +57,10 @@ const HeaderColumnBtn = styled.div`
 
 const HeaderLogo = styled(GatsbyLink)`
   display: inline-block;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 0;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: bold;
 `
 
 const HeaderBtn = styled(Btn)``
