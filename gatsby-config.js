@@ -1,12 +1,16 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
-    title: "My Gatsby Site",
+    title: "React Windy",
   },
   plugins: [
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
+    // "gatsby-plugin-sitemap",
     "gatsby-plugin-postcss",
     {
       resolve: "gatsby-plugin-manifest",
