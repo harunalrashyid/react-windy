@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react"
+import axios from "axios";
 import styled from "styled-components"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo"
+
 import bgMorning from "../images/morning.svg";
 import bgDay from "../images/day.svg";
 import bgEvening from "../images/evening.svg";
@@ -13,12 +16,15 @@ import { Container, Row } from "../styles/common"
 // markup
 const IndexPage = () => {
 
+  const [ weatherData, setWeatherData ] = useState({})
   const [ currentHour, setCurrentHour ] = useState('')
 
-  const today = new Date()
   const MORNING_HOUR = 12
   const DAY_HOUR = 18
   const EVENING_HOUR = 24
+
+  const today = new Date()
+  const cityName = 'Jakarta'
 
   useEffect(() => {
     /* eslint-disable */
@@ -34,6 +40,29 @@ const IndexPage = () => {
 
   }, [])
 
+  useEffect(() => {
+    
+    axios({
+      url: `${ process.env.OWM_URL }/weather`,
+      params: {
+        q: `${ cityName }`,
+        units: `metric`,
+        appid: `${ process.env.OWM_KEY }`
+      }
+    }).then(result => {
+      setWeatherData(result.data)
+    }).catch(error => {
+      if (error.response) {
+        console.log(error.response.data)
+      } else if (error.request) {
+        console.log(error.request)
+      } else {
+        console.log('Error ', error.message)
+      }
+    })
+
+  }, [])
+
   /*
   const changeIndexBackground = () => {
     if (currentHour === '') {
@@ -46,23 +75,24 @@ const IndexPage = () => {
 
   return (
     <Layout>
+      <SEO title="Home" />
       <MainIndex type={ currentHour }>
         <Container>
           <ContentRow>
             <ContentColumn>
-              <ContentTitle>Jakarta</ContentTitle>
-              <ContentTemperature>24 °C</ContentTemperature>
-              <ContentStatus>Cloudly</ContentStatus>
+              <ContentTitle>{ weatherData.name || 'Jakarta' }</ContentTitle>
+              <ContentTemperature>{ (weatherData.main && Math.round( weatherData.main.temp )) || '0' } °C</ContentTemperature>
+              <ContentStatus>{ (weatherData.weather && weatherData.weather[0].description) || 'Cloudly' }</ContentStatus>
             </ContentColumn>
             <ContentColumnRight>
               <img src={ currentHour === 'evening' ? moon : sun } alt="moon or sun" width="150" />
               <ContentInfo>
                 <ContentInfoLabel>Humidity</ContentInfoLabel>
-                <ContentInfoValue>58%</ContentInfoValue>
+                <ContentInfoValue>{ (weatherData.main && weatherData.main.humidity) || '0' } %</ContentInfoValue>
               </ContentInfo>
               <ContentInfo>
                 <ContentInfoLabel>Wind</ContentInfoLabel>
-                <ContentInfoValue>2.57 K/M</ContentInfoValue>
+                <ContentInfoValue>{ (weatherData.wind && weatherData.wind.speed) || '0.0' } K/M</ContentInfoValue>
               </ContentInfo>
             </ContentColumnRight>
           </ContentRow>
@@ -129,6 +159,7 @@ const ContentTemperature = styled.h3`
 
 const ContentStatus = styled.p`
   font-size: 18px;
+  text-transform: capitalize;
   margin: 0;
 `
 

@@ -5,6 +5,8 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "React Windy",
+    description: "A simple page to get current weather",
+    author: "Harun"
   },
   plugins: [
     "gatsby-plugin-styled-components",
