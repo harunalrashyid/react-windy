@@ -9,7 +9,7 @@ const Header = () => (
     <HeaderContainer>
       <HeaderRow>
         <HeaderColumnLogo>
-          <HeaderLogo to="/about">Windy</HeaderLogo>
+          <HeaderLogo to="/">Windy</HeaderLogo>
         </HeaderColumnLogo>
         <HeaderColumnBtn>
           <HeaderBtn as="a" href="https://github.com/harunalrashyid/react-windy" rel="noopener noreferrer" target="_blank">GitHub</HeaderBtn>
@@ -61,6 +61,11 @@ const HeaderLogo = styled(GatsbyLink)`
   color: #ffffff;
   font-size: 1.5rem;
   font-weight: bold;
+  transition: all .2s ease;
+
+  &:hover {
+    color: #fab800;
+  }
 `
 
 const HeaderBtn = styled(Btn)`
