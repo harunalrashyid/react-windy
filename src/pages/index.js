@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 
 import Layout from "../components/layout"
@@ -8,23 +8,45 @@ import bgEvening from "../images/evening.svg";
 import sun from "../images/sun.svg";
 import moon from "../images/moon.svg";
 
-import { Btn, Container, Row } from "../styles/common"
+import { Container, Row } from "../styles/common"
 
 // markup
 const IndexPage = () => {
-  const [ indexBackground, setIndexBackground ] = useState('')
 
-  const changeIndexBackground = () => {
-    if (indexBackground === '') {
-      return setIndexBackground('evening')
+  const [ currentHour, setCurrentHour ] = useState('')
+
+  const today = new Date()
+  const MORNING_HOUR = 12
+  const DAY_HOUR = 18
+  const EVENING_HOUR = 24
+
+  useEffect(() => {
+    /* eslint-disable */
+    if ( today.getHours() < MORNING_HOUR ) {
+      setCurrentHour('morning')
+    } else if ( today.getHours() < DAY_HOUR ) {
+      setCurrentHour('day')
+    } else if ( today.getHours() < EVENING_HOUR ) {
+      setCurrentHour('evening')
+    } else {
+      setCurrentHour('morning')
     }
 
-    return setIndexBackground('')
+  }, [])
+
+  /*
+  const changeIndexBackground = () => {
+    if (currentHour === '') {
+      return setCurrentHour('evening')
+    }
+
+    return setCurrentHour('')
   }
+  */
 
   return (
     <Layout>
-      <MainIndex type={ indexBackground }>
+      <MainIndex type={ currentHour }>
         <Container>
           <ContentRow>
             <ContentColumn>
@@ -33,7 +55,7 @@ const IndexPage = () => {
               <ContentStatus>Cloudly</ContentStatus>
             </ContentColumn>
             <ContentColumnRight>
-              <img src={sun} width="150" />
+              <img src={ currentHour === 'evening' ? moon : sun } alt="moon or sun" width="150" />
               <ContentInfo>
                 <ContentInfoLabel>Humidity</ContentInfoLabel>
                 <ContentInfoValue>58%</ContentInfoValue>
@@ -54,7 +76,19 @@ export default IndexPage
 
 // styles
 const MainIndex = styled.main`
-  background-image: url( ${props => props.type === 'evening' ? bgEvening : bgMorning} );
+  background-image: url( ${props => {
+    switch(props.type) {
+      case 'morning':
+        return bgMorning
+      case 'day':
+        return bgDay
+      case 'evening':
+        return bgEvening
+      default:
+        return bgMorning
+    }
+  }} );
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
