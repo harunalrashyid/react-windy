@@ -43,6 +43,11 @@ export const Btn = styled.button`
   outline: 0;
   border: none;
   background: #fab800;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    background: #ffc82e;
+  }
 
   &:focus,
   &:active {

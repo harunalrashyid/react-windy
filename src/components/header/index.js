@@ -63,4 +63,7 @@ const HeaderLogo = styled(GatsbyLink)`
   font-weight: bold;
 `
 
-const HeaderBtn = styled(Btn)``
+const HeaderBtn = styled(Btn)`
+  color: #000000;
+  text-decoration: none;
+`
